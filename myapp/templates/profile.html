@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <!-- Display messages -->
+        {% if messages %}
+            <div class="alert alert-success" role="alert">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <h2>Profile Details</h2>
+
+        <!-- Display the current username and profile details -->
+        <div>
+            <h4>Username: {{ user.username }}</h4>
+            <p>Address: {{ user_profile.address }}</p>
+            <p>Pin Code: {{ user_profile.pin_code }}</p>
+            <p>Phone Number: {{ user_profile.phone_number }}</p>
+            <p>
+                {% if user_profile.profile_photo %}
+                    <img src="{{ user_profile.profile_photo.url }}" alt="Profile Photo" style="width: 100px;">
+                {% else %}
+                    <img src="https://via.placeholder.com/100" alt="Profile Photo">
+                {% endif %}
+            </p>
+            
+            <!-- Button to open the modal -->
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                Edit Profile
+            </button>
+        </div>
+
+        <!-- Profile Edit Modal -->
+        <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Profile Edit Form -->
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary" name="update_profile">Update Profile</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password Section -->
+        <div class="mt-4">
+            <h3>Change Password</h3>
+
+            <!-- Password Change Form -->
+            <form method="POST">
+                {% csrf_token %}
+                {{ password_form.as_p }}
+                <button type="submit" class="btn btn-danger" name="change_password">Change Password</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

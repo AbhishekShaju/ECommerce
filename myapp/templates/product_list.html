@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Products in Category Section -->
+<div class="container mt-5 mb-5 products-container">
+    <div class="text-center my-5">
+        <h3 class="section-title">
+            PRODUCTS{{ category.name }}
+        </h3>
+    </div>
+
+    <!-- Product Cards Section -->
+    <div class="row mt-4">
+        {% for product in products %}
+            <div class="col-lg-4 col-md-6 mb-4 d-flex justify-content-center">
+                <div class="card product-card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <!-- Product Image -->
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top p-2" alt="{{ product.name }}" 
+                             style="height: 300px; object-fit: cover; border-bottom: 2px solid #4CAF50;">
+                    {% endif %}
+                    <!-- Product Content -->
+                    <div class="card-body text-center">
+                        <h4 class="card-title font-weight-bold text-success product-name">{{ product.name }}</h4>
+                        <p class="product-description mt-2">{{ product.description }}</p>
+                        <p class="product-price text-muted">Price: ₹ {{ product.price }}</p>
+                        <a href="{% url 'product_details' product.id %}" class="btn btn-primary mt-3 px-4 rounded-pill">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Styles for improved design -->
+<style>
+    /* General Page Styling */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: #002147
+                    url('https://images.unsplash.com/photo-1547743026-d5004a3a2210');
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+    }
+
+    /* Products Section Background */
+    .products-container {
+        background-color: #f9f9f9;
+        padding: 40px;
+        border-radius: 12px;
+    }
+
+    /* Section Title Styling */
+    .section-title {
+        font-weight: 700;
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #333;
+        border-bottom: 3px solid #4CAF50;
+        display: inline-block;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+    }
+
+    /* Product Card Styling */
+    .product-card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Product Name Styling */
+    .product-name {
+        font-size: 1.8rem;
+        color: #333;
+        margin-top: 15px;
+        font-weight: 700;
+    }
+
+    /* Product Description Styling */
+    .product-description {
+        font-size: 1.2rem;
+        color: #666;
+        margin-top: 10px;
+    }
+
+    /* Product Price Styling */
+    .product-price {
+        font-size: 1.3rem;
+        color: #555;
+        font-weight: bold;
+    }
+
+    /* Button Styling */
+    .btn-success {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        border-radius: 50px;
+        background-color: #4CAF50;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-success:hover {
+        background-color: #388E3C;
+        color: white;
+        transform: scale(1.05);
+    }
+</style>
+
+{% endblock %}

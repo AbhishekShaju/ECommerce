@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Your Orders</h2>
+
+        {% if orders_with_items %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                        <th>Ordered Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order_item in orders_with_items %}
+                        <tr>
+                            <td>{{ order_item.order.id }}</td>
+                            <td>${{ order_item.order.total_price }}</td>
+                            <td>{{ order_item.order.status }}</td>
+                            <td>{{ order_item.order.created_at }}</td>
+                            <td>
+                                <ul>
+                                    {% for item in order_item.items %}
+                                        <li>{{ item.product.name }} (Quantity: {{ item.quantity }})</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You haven't placed any orders yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Your Cart</h1>
+
+    <!-- Display Cart Items -->
+    <div class="cart-items mt-4">
+        {% if cart_items %}
+            {% for item in cart_items %}
+            <div class="cart-item mb-4">
+                <div class="row">
+                    <!-- Product Image and Info -->
+                    <div class="col-md-3">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid" style="max-width: 100px;">
+                    </div>
+                    <div class="col-md-3">
+                        <p><strong>{{ item.product.name }}</strong></p>
+                        <p>Price: ${{ item.product.price }}</p>
+                    </div>
+
+                    <!-- Quantity Controls -->
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center">
+                            <!-- Decrease Quantity -->
+                            <a href="{% url 'update_cart' item.product.id 'decrease' %}" class="btn btn-outline-secondary me-2">-</a>
+                            
+                            <!-- Quantity Display -->
+                            <span class="mx-2">{{ item.quantity }}</span>
+                            
+                            <!-- Increase Quantity -->
+                            <a href="{% url 'update_cart' item.product.id 'increase' %}" class="btn btn-outline-secondary ms-2">+</a>
+                        </div>
+                    </div>
+
+                    <!-- Remove Item -->
+                    <div class="col-md-3">
+                        <a href="{% url 'remove_item' item.product.id %}" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <!-- No Items Message -->
+            <p class="text-center text-muted">Your cart is empty.</p>
+        {% endif %}
+    </div>
+
+    <!-- Total Price -->
+    {% if cart_items %}
+    <div class="total mt-4">
+        <p><strong>Total: ${{ total_price }}</strong></p>
+    </div>
+    {% endif %}
+
+    <!-- Checkout Button -->
+    <div class="checkout mt-4">
+        {% if cart_items %}
+        <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+        {% else %}
+        <button class="btn btn-secondary" disabled>Proceed to Checkout</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

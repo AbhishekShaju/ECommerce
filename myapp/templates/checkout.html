@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm p-4">
+                <h1 class="text-center mb-4">Checkout</h1>
+
+                <!-- Cart Table -->
+                <h2 class="mb-4">Your Cart</h2>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ item.product.price }}</td> <!-- Price calculated in the view -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Total Price -->
+                <p class="lead text-right">Total Price: ${{ total_price }}</p>
+
+                <!-- Shipping Details Form -->
+                <h3 class="mt-4">Shipping Details</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="billing_address">Billing Address</label>
+                        <textarea id="billing_address" name="billing_address" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="pincode">Pincode</label>
+                        <input type="text" id="pincode" name="pincode" class="form-control" maxlength="10" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" id="phone_number" name="phone_number" class="form-control" maxlength="15" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

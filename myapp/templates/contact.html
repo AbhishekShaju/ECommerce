@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Contact Us Section -->
+<div class="container contact-us-container my-5 py-5" style="background-color: rgba(255, 255, 255, 0.9); border-radius: 10px;">
+    <div class="text-center">
+        <h3 class="section-title about-title">Contact Us</h3>
+        <p class="about-text mt-4">
+            If you have any questions or concerns, feel free to reach out to us. We're happy to assist!
+        </p>
+    </div>
+
+    <!-- Contact Details Section -->
+    <div class="row mt-5">
+        <!-- Contact Information -->
+        <div class="col-md-6">
+            <div class="contact-info">
+                <h5>Our Address</h5>
+                <p>Vox Prvt LTD<br>
+                  Kottayam , KL
+                </p>
+
+                <h5>Email</h5>
+                <p><a href="mailto:support@greengrocer.com">support@Vox.com</a></p>
+
+                <h5>Phone</h5>
+                <p>+1 234 567 890</p>
+
+                <h5>Business Hours</h5>
+                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                    Saturday: 10:00 AM - 4:00 PM
+                </p>
+            </div>
+        </div>
+
+        
+
+
+
+<!-- Styling for improved design -->
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #002147;
+        color: #333;
+    }
+
+    .contact-us-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+    }
+
+    .contact-info {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info h5 {
+        font-weight: 700;
+        color: #4CAF50;
+    }
+
+    .contact-info p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .map-embed {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    iframe {
+        border-radius: 10px;
+    }
+
+    .footer {
+        background-color: #333;
+        color: #ffffff;
+    }
+
+    .footer-title {
+        font-size: 1.5rem;
+        color: #4CAF50;
+        margin-bottom: 15px;
+    }
+
+    .social-links a {
+        color: #ffffff;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: #4CAF50;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: #333;
+    }
+
+    .about-text {
+        font-size: 1.2rem;
+        color: #666;
+        max-width: 800px;
+        margin: 20px auto;
+        line-height: 1.6;
+    }
+
+</style>
+
+{% endblock %}

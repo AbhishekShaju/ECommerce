@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+  {% block content %}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      /* Basic reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Poppins', sans-serif;
+        background: #002147;
+        color: #333333;
+      }
+
+      .register-container {
+        width: 360px;
+        padding: 40px;
+        background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+        backdrop-filter: blur(15px); /* Soft blur effect for card */
+      }
+
+      .register-container:hover {
+        transform: scale(1.03);
+      }
+
+      .register-container .avatar {
+        background: linear-gradient(135deg, #ff6a00, #ee0979); /* Gradient Avatar */
+        border-radius: 50%;
+        width: 90px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        color: white;
+        font-size: 36px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .register-container .avatar:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      .register-container h2 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+
+      .register-container input[type="text"],
+      .register-container input[type="email"],
+      .register-container input[type="password"] {
+        width: 100%;
+        padding: 14px 18px;
+        margin: 15px 0;
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        background-color: #f0f0f0;
+        font-size: 16px;
+        color: #333;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .register-container input[type="text"]:focus,
+      .register-container input[type="email"]:focus,
+      .register-container input[type="password"]:focus {
+        border: 1px solid #00c6ff;
+        background-color: #fff;
+        outline: none;
+        box-shadow: 0 8px 16px rgba(0, 196, 255, 0.3);
+      }
+
+      .register-container input[type="text"]::placeholder,
+      .register-container input[type="email"]::placeholder,
+      .register-container input[type="password"]::placeholder {
+        color: #888;
+      }
+
+      .register-container .register-btn {
+        width: 100%;
+        padding: 14px 0;
+        margin: 20px 0;
+        background-color: #002147; /* Oxford Blue */
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .register-container .register-btn:hover {
+        background-color:rgb(255, 0, 0); /* Slightly darker shade for hover effect */
+        transform: translateY(-2px);
+      }
+
+      .register-container .options {
+        font-size: 14px;
+        color: #555;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .register-container .options a {
+        color: #002147;
+        text-decoration: none;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .register-container .options a:hover {
+        text-decoration: underline;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 480px) {
+        .register-container {
+          width: 90%;
+          padding: 30px;
+        }
+
+        .register-container h2 {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="register-container">
+      <!-- Display messages -->
+      {% if messages %}
+        {% for message in messages %}
+          <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="submit" class="register-btn">Register</button>
+      </form>
+      
+      <div class="options">
+        <a href="{% url 'login' %}">Already have an account? Login</a>
+      </div>
+    </div>
+  {% endblock %}
+  </body>
+</html>
